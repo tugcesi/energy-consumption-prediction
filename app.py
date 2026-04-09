@@ -198,8 +198,6 @@ if page == "🏠 Ana Sayfa":
     else:
         df = st.session_state["df"]
 
-    df = st.session_state.get("df", get_sample_data())
-
     if st.session_state.get("is_demo") and uploaded is None:
         st.warning("⚠️ Demo moddasınız. Gerçek veriyi görmek için dosya yükleyin.")
 
@@ -432,9 +430,6 @@ elif page == "🤖 Model & Tahmin":
 
                 # Plot last 500 real + predictions
                 n_show = min(500, len(y_test_inv))
-                recent_times = df["Datetime"].values[
-                    -(n_show + steps) : len(df) - steps if steps > 0 else len(df)
-                ]
                 fig_pred = go.Figure()
                 fig_pred.add_trace(
                     go.Scatter(
